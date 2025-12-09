@@ -143,3 +143,71 @@ Now that we are acquainted with the API, we can start diving deeper into the mod
 
 ### Chapter 1.2: Modules for 6 Pillars
 
+One thing all NUS students have to do, regardless of degree, is fulfill the 6 University pillars. To fulfill a pillar, you have to do at least 1 module from that pillar. 
+
+For BAIS students, the 'Digital Literacy' and 'Computing Ethics' pillar is fulfilled from doing *CS1010A* and *IS1108* respectively. For the other 4 pillars, they are free to choose from the wide selection of modules the pillar offers.
+
+To sift the unique pillars out, we can check their prefixes and assign them to their parent pillar. 
+
+```
+all_mods_list = read_json('all_mods.json')
+
+pillar_mods = {
+    'GEX': [],
+    'GEC': [],
+    'GES': [],
+    'GEN': [],
+}
+```
+
+We begin with getting the entire module list from the JSON file we saved in the previous commit. I also define a dictionary to organise the pillar modules.
+
+```
+for mod in all_mods_list:
+    modCode = mod['moduleCode']
+    prefix = modCode[:3]
+    if prefix in pillar_mods:
+        pillar_mods[prefix].append(modCode)
+
+pillar_mods['default'] = ['CS1010A', 'IS1108']
+
+to_json('target_mods.json', [pillar_mods])
+```
+
+Then, I loop through all the modules in the 2025/26 year and check the first 3 characters of the module code. If it corresponds with any of the dictionary keys, I append the module to the list.
+
+After filling the lists of the 4 non-computing pillars, I make a separate key 'default' and add the 2 default pillar modules to its list. Lastly, I save the dictionary as a JSON file. 
+
+```
+[
+  {
+    "GEX": [
+      "GEX1000",
+      "GEX1003",
+      ...
+    ],
+    "GEC": [
+      "GEC1001",
+      "GEC1002",
+      ...
+    ],
+    "GES": [
+      "GES1002",
+      "GES1002T",
+      "GES1003",
+      ...
+    ],
+    "GEN": [
+      "GEN2000",
+      "GEN2001",
+      ...
+    ],
+    "default": [
+      "CS1010A",
+      "IS1108"
+    ]
+  }
+]
+```
+
+Notice how I save it as an array. This is because we will be adding more dictionaries to the JSON file, which will take care of programme elective (PE) and unrestricted elective (UE) modules, etc.

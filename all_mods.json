@@ -478,6 +478,13 @@
     ]
   },
   {
+    "moduleCode": "ADS5101",
+    "title": "Introduction to Data Science for Decision-Making",
+    "semesters": [
+      2
+    ]
+  },
+  {
     "moduleCode": "ADS5101M",
     "title": "Introduction to Data Science for Decision-Making (Maritime)",
     "semesters": [
@@ -1190,13 +1197,6 @@
     "title": "Topics in Research by Design 5",
     "semesters": [
       1
-    ]
-  },
-  {
-    "moduleCode": "AR5955G",
-    "title": "Topics in Research by Design 7",
-    "semesters": [
-      2
     ]
   },
   {
@@ -5618,6 +5618,13 @@
   {
     "moduleCode": "CDE2503",
     "title": "Cities in Nature",
+    "semesters": [
+      2
+    ]
+  },
+  {
+    "moduleCode": "CDE2506",
+    "title": "Healthy Cities",
     "semesters": [
       2
     ]
@@ -12625,7 +12632,8 @@
     "moduleCode": "DY5190",
     "title": "Graduate Seminar Course",
     "semesters": [
-      1
+      1,
+      2
     ]
   },
   {
@@ -13749,7 +13757,8 @@
     "moduleCode": "ECA5102",
     "title": "Macroeconomics",
     "semesters": [
-      1
+      1,
+      2
     ]
   },
   {
@@ -13757,6 +13766,13 @@
     "title": "Quantitative & Computing Methods",
     "semesters": [
       1
+    ]
+  },
+  {
+    "moduleCode": "ECA5304",
+    "title": "Machine Learning and Economic Forecasting",
+    "semesters": [
+      2
     ]
   },
   {
@@ -13774,6 +13790,13 @@
     ]
   },
   {
+    "moduleCode": "ECA5308",
+    "title": "Machine Learning for Applied Economics",
+    "semesters": [
+      2
+    ]
+  },
+  {
     "moduleCode": "ECA5313",
     "title": "Topics in Econometrics",
     "semesters": [
@@ -13781,17 +13804,26 @@
     ]
   },
   {
+    "moduleCode": "ECA5325",
+    "title": "Project & Policy Evaluation",
+    "semesters": [
+      2
+    ]
+  },
+  {
     "moduleCode": "ECA5333",
     "title": "Financial Markets & Portfolio Management",
     "semesters": [
-      1
+      1,
+      2
     ]
   },
   {
     "moduleCode": "ECA5334",
     "title": "Corporate Finance",
     "semesters": [
-      1
+      1,
+      2
     ]
   },
   {
@@ -13805,7 +13837,15 @@
     "moduleCode": "ECA5343",
     "title": "Advanced International Finance",
     "semesters": [
-      1
+      1,
+      2
+    ]
+  },
+  {
+    "moduleCode": "ECA5351",
+    "title": "Public Finance",
+    "semesters": [
+      2
     ]
   },
   {
@@ -13816,6 +13856,27 @@
     ]
   },
   {
+    "moduleCode": "ECA5372",
+    "title": "Big Data Analytics and Technologies",
+    "semesters": [
+      2
+    ]
+  },
+  {
+    "moduleCode": "ECA5373",
+    "title": "The Singapore Economy",
+    "semesters": [
+      2
+    ]
+  },
+  {
+    "moduleCode": "ECA5374",
+    "title": "The Modern Chinese Economy",
+    "semesters": [
+      2
+    ]
+  },
+  {
     "moduleCode": "ECA5375",
     "title": "Economic Growth in East Asia",
     "semesters": [
@@ -13823,10 +13884,46 @@
     ]
   },
   {
+    "moduleCode": "ECA5376",
+    "title": "Auctions and Market Design",
+    "semesters": [
+      2
+    ]
+  },
+  {
+    "moduleCode": "ECA5381",
+    "title": "Urban Economics",
+    "semesters": [
+      2
+    ]
+  },
+  {
+    "moduleCode": "ECA5383",
+    "title": "Environmental Economics",
+    "semesters": [
+      2
+    ]
+  },
+  {
+    "moduleCode": "ECA5396",
+    "title": "Economics of Business and Law of Intellectual Assets",
+    "semesters": [
+      2
+    ]
+  },
+  {
     "moduleCode": "ECA5401",
     "title": "Graduate Internship in Applied Economics",
     "semesters": [
-      1
+      1,
+      2
+    ]
+  },
+  {
+    "moduleCode": "ECA5880",
+    "title": "Topics in Applied Economics",
+    "semesters": [
+      2
     ]
   },
   {
@@ -13840,7 +13937,8 @@
     "moduleCode": "ECA5884",
     "title": "Applied Behavioural Economics",
     "semesters": [
-      1
+      1,
+      2
     ]
   },
   {
@@ -24852,20 +24950,6 @@
     ]
   },
   {
-    "moduleCode": "LAT4204",
-    "title": "Thai for Academic Purposes",
-    "semesters": [
-      2
-    ]
-  },
-  {
-    "moduleCode": "LAT4204HM",
-    "title": "Thai for Academic Purposes",
-    "semesters": [
-      2
-    ]
-  },
-  {
     "moduleCode": "LAV1201",
     "title": "Vietnamese 1",
     "semesters": [
@@ -31764,6 +31848,13 @@
     ]
   },
   {
+    "moduleCode": "MDG5255",
+    "title": "The Cell as a Machine",
+    "semesters": [
+      2
+    ]
+  },
+  {
     "moduleCode": "MDG5256",
     "title": "Machine Learning in Medicine",
     "semesters": [
@@ -32232,7 +32323,8 @@
     "moduleCode": "ME5400",
     "title": "Robotics Project",
     "semesters": [
-      1
+      1,
+      2
     ]
   },
   {
@@ -32430,6 +32522,13 @@
     "title": "Functional Materials for Mechanical Engineering",
     "semesters": [
       1
+    ]
+  },
+  {
+    "moduleCode": "ME5521",
+    "title": "Nanotechnology for Engineering Applications",
+    "semesters": [
+      2
     ]
   },
   {
@@ -35240,8 +35339,7 @@
     "moduleCode": "MUA3265",
     "title": "Career Development Independent Project",
     "semesters": [
-      1,
-      2
+      1
     ]
   },
   {
@@ -43473,13 +43571,6 @@
     ]
   },
   {
-    "moduleCode": "PS2238",
-    "title": "International Politics of Northeast Asia",
-    "semesters": [
-      2
-    ]
-  },
-  {
     "moduleCode": "PS2240",
     "title": "Introduction to Public Administration",
     "semesters": [
@@ -43967,13 +44058,6 @@
   {
     "moduleCode": "PS4881DHM",
     "title": "Topics in CP: Money and Politics",
-    "semesters": [
-      2
-    ]
-  },
-  {
-    "moduleCode": "PS4881G",
-    "title": "Topics in CP: Politics of the Korean Peninsula",
     "semesters": [
       2
     ]

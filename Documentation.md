@@ -287,8 +287,85 @@ This makes the first value in the split group list the title, and the rest of th
 
 I attach the list of module codes as the value to the group title key in the dictionary 'PE_mods'. When I'm done doing this for all the groups, I add the dictionary to 'target_mods' and save it back to the JSON file.
 
+Before we move on to the next subchapter, I'd like to segregate the programme elective modules further into level groups. So lets load the target_mods JSON in again.
+
+```
+target_mods = read_json('target_mods.json')
+PE_mods = target_mods['PE_mods']
+
+for title, mod_list in PE_mods.items():
+    new = {
+        '2k': [],
+        '3k': [],
+        '4k': []
+    }
+    for mod in mod_list:
+        lvl = f'{mod[-4]}k'
+        new[lvl].append(mod)
+    PE_mods[title] = new
+
+target_mods['PE_mods'] = PE_mods
+to_json(target_mods)
+```
+Basically, I extract the list of modules for each PE group, and organised them into a dictionay called 'new' according to their level, which is indicated by the 4th last character in the module code.
+
+After assigning 'new' to each group key as its new value in the key-value pair for every group, I write the PE_mods back to target_mods, and target_mods back to the JSON file.
+
 ### Chapter 1.4: Unrestricted Modules
 
+Ok, lots to be done for this subchapter. First thing to do is list out all NUS minors and majors of interest.
+
+**Chinese Language**:
+
+Pass 5 modules: CL1101E, CL2101, CL2102, CL2103, CL3104
+
+**Economics**: (tough)
 
 
+English Language and Linguistics
 
+Human Services (tough)
+
+Malay Studies
+
+Psychology
+
+Sociology
+
+Theatre and Performance Studies
+
+Aquatic Ecology
+
+Asian Studies
+
+Film Studies
+
+Geographical Information Systems
+
+Geosciences (#)
+
+Interactive Media Development
+
+Urban Studies
+Data Engineering
+Architectural Studies
+Biomedical Engineering
+Hydrogen and Low Carbon Technology
+Landscape Architectural Studies
+Project Management
+Visual Communication Design
+Data Engineering (#)
+Infrastructure Management and Finance
+Integrative Health
+Analytical Chemistry
+Astronomy
+Bioinformatics
+Biophysics
+Chemistry
+Data Analytics
+Geosciences
+Environmental Sustainability
+Physics
+Statistics
+Quantitative Finance
+Medical Physics

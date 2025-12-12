@@ -316,39 +316,121 @@ After assigning 'new' to each group key as its new value in the key-value pair f
 Ok, lots to be done for this subchapter. First thing to do is list out all NUS minors and majors of interest.
 
 **Chinese Language**:
-
-Pass 5 modules: CL1101E, CL2101, CL2102, CL2103, CL3104
+*Pass 5 modules: CL1101E, CL2101, CL2102, CL2103, CL3104*
 
 **Economics**: (tough)
 
+*Pass EC1101E, EC2101, and 12 units from EC or EC-recognised courses*
 
-English Language and Linguistics
+EC-recognised mods:
 
-Human Services (tough)
+*FIN2004/FIN2004X/FIN2704/FIN2704X Finance*
+*RE1704 Principles of Real Estate Economics*
+*RE2705 Urban Economics*
+*MA1102R / MA2002 Calculus*
+*MA1521 Calculus for Computing*
+*ST3131 Regression Analysis*
 
-Malay Studies
+**English Language and Linguistics**
 
-Psychology
+*Pass EL1101E, 1 of the following(EL2101, EL2102, EL2111, EL2151), and 1 lvl-3k EL mod*
 
-Sociology
+**Human Services** (tough)
 
-Theatre and Performance Studies
+*Pass SW1101E, SW2104, and 12 units (4 mods) of lvl-3k SW mods **excluding** the following:*
 
-Aquatic Ecology
+*SW2101 Working with Individuals and Families*
+*SW2105 Values & Skills for Helping Relationships*
+*SW2106 Social Group Work Practice*
+*SW3103 Social Work Field Practice*
+*SW3105 Community Work Practice*
+*SW3209 Counselling Theories & Practice*
+*SW3214 Counselling Process & Skills*
+*SW3103C Social Work Field Practice (I)*
+*SW3104B Social Work Field Practice (II)*
 
-Asian Studies
+**Malay Studies**
 
-Film Studies
+*Pass MS1102E and 16 units (4 mods) of MS modules, where 1 mod must be >= lvl 3k.*
 
-Geographical Information Systems
+**Psychology**
 
-Geosciences (#)
+*Pass PL1101E, and 16 units (4 mods) from the following:*
 
-Interactive Media Development
+*PL2131 Research and Statistical Methods I*
+*PL3102 Biological Psychology*
+*PL3103 Cognitive Psychology*
+*PL3104 Developmental Psychology*
+*PL3105 Social Psychology*
+*PL3106 Mental Health and Distress*
 
-Urban Studies
-Data Engineering
-Architectural Studies
+**Geosciences** (#)
+
+*Pass GE2103, XD3103, 4 units from Grp A, and 8 units from Grp B*
+
+Group A:
+
+*CM1102 Chemistry - The Central Science*
+*CM1417/CM1417X Fundamentals of Chemistry*
+*LSM1103/LSM2252 Biodiversity*
+*LSM1301/LSM1301FC/LSM1301X General Biology*
+*PC1201 Fundamental of Physics*
+
+Group B:
+
+*GE2215 Introduction to GIS*
+*GE3210 Natural Resources: Policy and Practice*
+*GE3231 Natural Hazards*
+*GE3250 Nature and Society*
+*GE3253 Weather and Climate*
+*GE3255 Aquatic, Riparian and Coastal Systems*
+*GE3256 Earth Surface Processes, Landforms and Ecosystems*
+*LSM2251 Ecology and Environment*
+*LSM3254 Ecology and Aquatic Environments*
+*LSM3255 Ecological of Terrestrial Environments*
+*EC3383 Environmental Economics*
+*HY2235 Environmental History*
+*CE2134/ME2134 Fluid Mechanics*
+*CE3132 Hydrology and Free Surface Flows*
+*CM3261 Environmental Chemistry*
+*ESE2001 Environmental Challenges in the Anthropocene*
+
+**Interactive Media Development**
+
+*Minimum 2 modules from Grp A and 2 modules from Grp B*
+
+Group A:
+
+*CS1010/variant*
+*CS3240*
+*CS3249*
+*CS4240*
+*CS4249*
+*CS4350*
+
+Group B:
+
+*NM3217*
+*NM3230*
+*NM3243*
+*NM4259*
+*NM4260*
+*NM5219R*
+
+**Architectural Studies**
+
+*Pass AR1101A, AR1328A, AR2227, and 4 units (1 mod) from the following:*
+
+*AR1329*
+*AR2225*
+*AR2228*
+*AR3223*
+*CDE2501*
+*CDE2502*
+*CDE2503*
+*CDE3504*
+*CDE3505*
+
 Biomedical Engineering
 Hydrogen and Low Carbon Technology
 Landscape Architectural Studies

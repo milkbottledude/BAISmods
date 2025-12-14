@@ -6,19 +6,19 @@ Feel free to skip ⏭️ to any chapters or versions that interest you 😊.
 Chapter 1: Syncing with NUSmods
 - 1.1: [Getting to know the API](#11-getting-to-know-the-api) 
 - 1.2: [Modules for 6 Pillars](#12-modules-for-6-pillars) 
-- 1.3: [](#13-) 
-- 1.4: [](#14-)
+- 1.3: [Core and Programme Elective Modules](#13-core-and-programme-elective-modules) 
+- 1.4: [Interdisciplinary & Cross-Disciplinary Modules](#14-interdisciplinary-&-cross-disciplinary-modules)
 
 
-Chapter 2: Module Arrangement
-- 2.1: [placeholder](#21-placeholder)
-- 2.2: [](#22-)
-- 2.3: [](#23-)
+Chapter 2: Module Arrangement and Configuration
+- 2.1: [Modules of Minors](#21-modules-of-minors)
+- 2.2: [Modules of Majors](#22-modules-of-majors-tbc) (TBC!)
+- 2.3: [Module Formatting](#23-module-formatting)
 
-Chapter 3: Programme Electives
+Chapter 3: placeholder
 - 3.1: [](#31-)
 
-Chapter 4: Unrestricted Electives
+Chapter 4: placeholder
 - 4.1: [](#41-)
 
 
@@ -388,9 +388,11 @@ That concludes our work for syncing the ID and CD modules to BAISmods. This way,
 
 Here, we provide the list of modules applicable for ID and CD education use.
 
-### Chapter 1.5: Unrestricted Modules
+## Chapter 2: Unrestricted Modules
 
-Ok, lots to be done for this subchapter. First thing to do is list out all NUS minors and majors of interest.
+### 2.1: Modules of Minors
+
+Ok, lots to be done for this subchapter. First thing to do is list out all NUS minors of interest.
 
 **1) Chinese Language**:
 
@@ -569,7 +571,11 @@ Group B:
 
 *LSM2106, LSM2212, LSM2231, LSM2233, LSM3243, LSM3223, LSM4243*
 
-That makes a total of 21 selected minors to be included in BAISmods. I've added the minors and their requirements to a [text file](minors.txt), but its still not in an arrangement that is favourable for parsing by python.
+### 2.2 Modules of Majors (tbc!)
+
+### 2.3: Module Formatting
+
+So far, that makes a total of 21 selected minors to be included in BAISmods. I've added the minors and their requirements to a [text file](minors.txt), but its still not in an arrangement that is favourable for parsing by python.
 
 I'll be implementing a format to minors.txt that will look quite silly, but works when I have to read the txt file from a python file in the future. 
 

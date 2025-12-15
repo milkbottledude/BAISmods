@@ -692,5 +692,32 @@ If the module code is present, then I extract it's list of prerequisite mods usi
 
 That concludes chapter 2.4 of obtaining the prerequisite and 'required for' information for each module. A long process, but it beats overloading the API.
 
-*what do i do nowwwwwwww, chapt 3? or chapt 2.5?? what is even the chapt gonna be abt* AHHHHHHHHHHH
+## Chapter 3: Module Arrangement
+
+Now that we have all the modules a BAIS student will take and then some, its time to focus on the algorithm of dividing the chosen modules among the 8 semesters.
+
+We will assign the semesters their modules based on module priority, which will be as such:
+
+**High Priority**
+
+- Low level BAIS core mods + CS1010A + IS1108 + BT1101
+- UE modules not part of chosen minor(s)
+
+**Medium Priority**
+
+- Mid level BAIS modules that have many 'req_for' modules
+- Low level UE modules that are part of chosen minor(s)
+
+**Low Priority**
+
+- The 4 remaining modules needed to satisfy the 6 pillars
+- High level BAIS mods 
+- High level UE mods belonging to minor(s)
+
+Now lets establish some rules for module allocating:
+
+- To start, I plan to keep all unrestricted electives out of year 1 sem 1, as its unlikely for a student to declare their minor/2nd major just after matriculation. This might change in the future, but for now its just a little safety guardrail.
+
+- For the remaining 4 modules required to satisfy the 6 pillars, there cannot be more than 1 of such mods in a single semester
+
 

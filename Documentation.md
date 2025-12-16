@@ -694,6 +694,8 @@ That concludes chapter 2.4 of obtaining the prerequisite and 'required for' info
 
 ## Chapter 3: Module Arrangement
 
+### Chapter 3.1: Module Priority & Rules
+
 Now that we have all the modules a BAIS student will take and then some, its time to focus on the algorithm of dividing the chosen modules among the 8 semesters.
 
 We will assign the semesters their modules based on module priority, which will be as such:
@@ -714,10 +716,75 @@ We will assign the semesters their modules based on module priority, which will 
 - High level BAIS mods 
 - High level UE mods belonging to minor(s)
 
-Now lets establish some rules for module allocating:
+Now lets establish some **rules** that BAISmods will abide by when allocating modules to a semester:
 
-- To start, I plan to keep all unrestricted electives out of year 1 sem 1, as its unlikely for a student to declare their minor/2nd major just after matriculation. This might change in the future, but for now its just a little safety guardrail.
+1) I plan to keep all unrestricted electives out of year 1 sem 1, as its unlikely for a student to declare their minor/2nd major just after matriculation. This might change in the future, but for now its just a little safety guardrail.
 
-- For the remaining 4 modules required to satisfy the 6 pillars, there cannot be more than 1 of such mods in a single semester
+2) For the remaining 4 modules required to satisfy the 6 pillars, there cannot be more than 1 of such mods in a single semester
 
+3) IS4108 AI Solutioning Capstone Project can only be taken in y4s1 or y4s2, and Industry Experience Requirement can only be taken in y3s2 or y4s1. So there are 2 options: IS4108 and IER in y3s2 and y4s1 respectively, or y4s1 and y4s2 (more common)
+
+4) IS4108 AI Solutioning Capstone Project can only be put with **max** 2 other modules that are <= 4 units.
+
+5) Industry Experience Requirement can only be taken with **max** 2 other modules that are <= 4 units. If using ATAP (Advanced Technology Attachment Programme) to fulfill IER, **no other modules** allowed in that semester.
+
+To show the module priority system and rules in action, lets use it on a sample 8 semester module spread that I just created with chatGPT.
+
+It represents a typical module selection of a BAIS student. This particular student wants to dive deeper into IT and AI solutioning with their PE mods, and wants to use their UEs to learn spanish and take a minor in statistics.
+
+```
+BAIS COMMON CURRICULUM (40 units)
+University Pillars (24)
+
+CS1010A Programming Methodology (Digital Literacy)
+BT1101 Introduction to Business Analytics (Data Literacy)
+GEX1xxx Critique & Expression
+GEC1xxx Cultures & Connections
+GES1xxx Singapore Studies
+GEN2xxx Communities & Engagement
+IS1108 Digital and AI Ethics
+
+ID / CD Courses (12)
+ID2116 Computing for Design
+ID2122 Ecodesign And Sustainability
+DAO2703 Operations and Technology Management
+
+BAIS CORE MODULES (60 units)
+BT2102 Data Management and Visualisation
+CS2030 Programming Methodology II
+CS2040 Data Structures and Algorithms
+IS2101 Business and Technical Communication
+IS2108 Full-stack Software Engineering for AI Solutions I
+IS2109 AI and Machine Learning Techniques I
+IS3103 Digital Transformation and Leadership Communication
+MA1521 Calculus for Computing
+MA1522 Linear Algebra for Computing
+ST2334 Probability and Statistics
+Industry Experience Requirement (Internship / ATAP)
+IS4108 AI Solutioning Capstone Project
+
+BAIS PROGRAMME ELECTIVES (20 units)
+IS2102 Data Engineering
+IS3109 AI and Machine Learning Techniques II
+IS4234 Governance, Regulation, and Compliance Technology
+IS4236 Cloud Services and Infrastructure Management
+IS4401 Generative AI and Business Applications
+
+BAIS UNRESTRICTED ELECTIVES (40 units)
+(Spanish)
+LAS1202 Spanish 1
+LAS2201 Spanish 2
+LAS3201 Spanish 3
+LAS3202 Spanish 4
+LAS4201 Spanish 5
+
+(Minor in Statistics)
+ST1131 Introduction to Statistics and Statistical Computing
+ST2334 Probability and Statistics (alr in core courses so not needed)
+MA1521 Calculus for Computing (alr in core courses, not needed)
+ST2137 Statistical Computing and Programming
+ST3131 Regression Analysis
+
+(Extra UEs)
+BT3103 Application Systems Development for Business Analytics (to fulfill pre_req for IS4234 and IS4236)
 

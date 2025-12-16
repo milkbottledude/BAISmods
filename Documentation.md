@@ -700,29 +700,31 @@ Now that we have all the modules a BAIS student will take and then some, its tim
 
 We will assign the semesters their modules based on module priority, which will be as such:
 
-**High Priority**
+#### Very High Priority
+- BAIS core mods with no prerequisites, + CS1010A, IS1108, and BT1101
+- Low level UE language modules
 
-- Low level BAIS core mods + CS1010A + IS1108 + BT1101
-- UE modules not part of chosen minor(s)
+#### High Priority
+- Just unlocked, mid level BAIS modules that is required to unlock higher level BAIS mods
+- UE mods needed to access higher level PE/minor mods
 
-**Medium Priority**
-
-- Mid level BAIS modules that have many 'req_for' modules
-- Low level UE modules that are part of chosen minor(s)
-
-**Low Priority**
-
+#### Medium Priority
+- Just unlocked, mid level UE mods that are required to unlock higher level PE/minor mods
 - The 4 remaining modules needed to satisfy the 6 pillars
+
+#### Low Priority
 - High level BAIS mods 
-- High level UE mods belonging to minor(s)
+- High level/Miscellanous UE mods
 
-Now lets establish some **rules** that BAISmods will abide by when allocating modules to a semester:
+Now lets establish some rules that BAISmods will abide by when allocating modules to a semester:
 
-1) I plan to keep all unrestricted electives out of year 1 sem 1, as its unlikely for a student to declare their minor/2nd major just after matriculation. This might change in the future, but for now its just a little safety guardrail.
+#### Rules
+
+1) Every semester must contain a UE language module or UE pre-req module. Unless there are no longer any more UE modules under that criteria.
 
 2) For the remaining 4 modules required to satisfy the 6 pillars, there cannot be more than 1 of such mods in a single semester
 
-3) IS4108 AI Solutioning Capstone Project can only be taken in y4s1 or y4s2, and Industry Experience Requirement can only be taken in y3s2 or y4s1. So there are 2 options: IS4108 and IER in y3s2 and y4s1 respectively, or y4s1 and y4s2 (more common)
+3) IS4108 AI Solutioning Capstone Project can only be taken in y4s1 or y4s2, and Industry Experience Requirement can only be taken in y3s2 or y4s1. So there are 2 options: IS4108 and IER in y3s2 and y4s1 respectively, or y4s1 and y4s2 (more common, this will be the default)
 
 4) IS4108 AI Solutioning Capstone Project can only be put with **max** 2 other modules that are <= 4 units.
 
@@ -730,7 +732,9 @@ Now lets establish some **rules** that BAISmods will abide by when allocating mo
 
 To show the module priority system and rules in action, lets use it on a sample 8 semester module spread that I just created with chatGPT.
 
-It represents a typical module selection of a BAIS student. This particular student wants to dive deeper into IT and AI solutioning with their PE mods, and wants to use their UEs to learn spanish and take a minor in statistics.
+It represents a typical module selection of a BAIS student. This particular student wants to dive deeper into IT and AI solutioning with their PE mods.
+
+As for UEs, he/she wants to learn spanish and take a minor in statistics, as well as know more about how to stay healthy in SG's sedentary work culture.
 
 ```
 BAIS COMMON CURRICULUM (40 units)
@@ -771,20 +775,42 @@ IS4236 Cloud Services and Infrastructure Management
 IS4401 Generative AI and Business Applications
 
 BAIS UNRESTRICTED ELECTIVES (40 units)
-(Spanish)
+(Spanish, 5 mods)
 LAS1202 Spanish 1
 LAS2201 Spanish 2
 LAS3201 Spanish 3
 LAS3202 Spanish 4
 LAS4201 Spanish 5
 
-(Minor in Statistics)
+(Minor in Statistics, 3 mods)
 ST1131 Introduction to Statistics and Statistical Computing
 ST2334 Probability and Statistics (alr in core courses so not needed)
 MA1521 Calculus for Computing (alr in core courses, not needed)
 ST2137 Statistical Computing and Programming
 ST3131 Regression Analysis
 
-(Extra UEs)
+(Extra 2 UEs)
 BT3103 Application Systems Development for Business Analytics (to fulfill pre_req for IS4234 and IS4236)
+SH5104 Occupational Health
+```
+At this point in time, we are at stage 2 and the student has completed stage 1 (choosing their mods) of the BAISmods webapp process. We will code up stage 1 in the future, for now we are doing stage 2, which arranges all the mods into 8 semesters.
 
+Looking at the [first module priority](#high-priority) and keeping in mind the [rules](#rules), we can safely say the 1st semester's module list will look like this:
+
+**1st Sem**
+- LAS1202 (see Rule 1 and [High Priority](#high-priority))
+- CS1010A ([High Priority](#high-priority))
+- IS1108 ([High Priority](#high-priority))
+- BT1101 ([High Priority](#high-priority))
+- MA1521 ([High Priority](#high-priority))
+
+Standard stuff, but with a language module instead of the usual GEN/GEC/GEX module. 
+
+This is because you need to have completed Spanish 1 to progress to Spanish 2, but the modules of the 4 pillars don't lead to any other mods of interest (unless they do, which in that case it will be under [very high priority](#very-high-priority)'s 2nd bullet point). 
+
+This is the rationale of the priority and rules. Moving on to Sem 2:
+
+## 2nd Sem**
+- 
+
+*if inclined to, can use linking.py to check pre-req length of all chosen mods above*

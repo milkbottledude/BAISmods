@@ -1,9 +1,25 @@
+body {
+    margin: 0;
+}
 /* Base */
+.top_banner {
+    display: flex;
+    background-color: rgb(101, 101, 163);
+    margin-top: auto;
+    height: 75px;
+    align-items: center;
+}
 
 .base_tiles {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.button {
+    box-shadow: 0 3px 0 black; /* from gpt */
+    cursor: pointer; /* from gpt */
+    transition: transform 0.1s ease, box-shadow 0.1s ease; /* from gpt */    
 }
 
 .tile {
@@ -18,18 +34,31 @@
     margin: 20px;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 4px 0 black; /* from gpt */
-    cursor: pointer; /* from gpt */
-    transition: transform 0.1s ease, box-shadow 0.1s ease; /* from gpt */
+
     text-decoration: none;
     color: black;
 }
 
-.tile:active { /* from gpt */
+.button:active { /* from gpt */
     transform: translateY(4px);
     box-shadow: 0 2px 0 black;
 }
 
+/* pillar_mods */
+.back_button {
+    display: flex;
+    align-items: center;
+    font-size: large;
+    margin-left: 15px;
+    height: 40%;
+    border-radius: 10px;
+    border: 2px solid black;
+    text-decoration: none;
+    color: black;
+    padding: 8px;
+    background-color: azure;
+    font-weight: bold;
+}
 .dropdown-container {
     display: flex;
     flex-direction: column;
@@ -42,10 +71,6 @@
     background-color: bisque;
     align-items: center;
     width: 80%;
-}
-
-#dropGEX { /* remove ltr, to be done by js */
-    display: flex;
 }
 
 .dropdown-mod {
@@ -81,8 +106,4 @@
     width: 18px;
     height: 18px;
     margin-right: 10px;
-}
-
-#GEX1003_status { /* remove ltr, to be done by js */
-    display: flex;
 }

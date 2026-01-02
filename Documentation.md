@@ -1061,6 +1061,8 @@ Again, top 2, so ST2137 and ST3131. That leaves just SH5104 as the last mod from
 - IS4233
 - SH5104
 
+You may be wondering, what about modules that are only offered in sem 1? or sem2? It was not mentioned in the algorithm here, but it will be taken into account as well. If the rules decide that a mod should be allocated to sem 1 but its unable to, then it will allocated in the next sem.
+
 That is how the algorithm would organise the mods for a BAIS student across 8 semesters. Implementing the algorithm using code is going to be a real challenge, but its got to be done.
 
 ### 3.3: Coding up Algorithm

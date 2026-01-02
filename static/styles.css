@@ -37,18 +37,23 @@
 }
 
 .dropdown-menu {
-    display: flex;
+    display: none;
     flex-direction: column;
     background-color: bisque;
     align-items: center;
     width: 80%;
 }
+
+#dropGEX { /* remove ltr, to be done by js */
+    display: flex;
+}
+
 .dropdown-mod {
     display: flex;
-    width: 80%;
+    width: 95%;
     margin: 5px;
-    gap: 20px;
-    font-size: 25px;
+    font-size: 21px;
+    align-items: center;
 }
 
 .details_nusmods {
@@ -57,9 +62,27 @@
     border: 1.5px solid black;
     border-radius: 7px;
     padding: 0px 7px;
-    font-size: 18px;
+    font-size: 17px;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: 10px;
 }
 
 .select_mod {
     font-size: inherit;
+    margin-left: 7px
+}
+
+.select_status {
+    display: none;
+    background-color: green;
+    border-radius: 11px;
+    border: 2px solid white;
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+}
+
+#GEX1003_status { /* remove ltr, to be done by js */
+    display: flex;
 }

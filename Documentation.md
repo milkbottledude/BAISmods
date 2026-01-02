@@ -1083,7 +1083,11 @@ The blue containers are buttons which are meant to be pressed to access each gro
 
 Fig 4.2: First draft of [pillar_mods.html](templates/pillar_mods.html)
 
-Here, users can click which GE mods they would like to take, with a maximum of 1 mod from each group. Should they wish to take more, they will have to select the mod from the UE mods group at the end of base.html.
+Clicking each blue group button will dropdown its Pillar mods. So if you click GEX mods, all GEX mods will dropdown, while the other group mods remain hidden
 
-To find out more about a mod, they can click the '^' button on the right of each module button. The final product should have a dropdown description of the module upon pressing the '^' button, but for now it just leads you to the NUSmods module description.
+Here, users can click to select which GE mods they would like to take, with a maximum of 1 mod from each group. In this case, I clicked GEX1003, hence the green circle 🟢 next to it.
+
+Should they wish to take more, they will have to select the mod from the UE mods group at the end of base.html. To find out more about a mod, they can click the '?' button on the right of each module button. 
+
+The final product should dropdown a brief description of the module upon pressing '?', but for now it just leads you to the NUSmods module description.
 

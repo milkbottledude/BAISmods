@@ -79,3 +79,54 @@ const got_it = document.querySelector('.got_it')
 got_it.addEventListener('click', () => {
     pr_window.style.display = 'none'
 })
+
+// for green circle status + counting no. of mods and no. of 4ks
+
+const all_mod_buttons = document.querySelectorAll('.select_mod')
+const notice_div = document.querySelector('.not_done_notice')
+
+let total_chosen = []
+let chosen_4ks = 0
+
+all_mod_buttons.forEach(mod_button => {
+    mod_button.addEventListener('click', function() {
+        const mod_code = mod_button.textContent
+        const mod_status = document.querySelector(`#${mod_code}_status`)
+        if (mod_status.style.display === '') {
+            if (total_chosen.length === 5) {
+                notice_div.textContent = 'You have already selected 5 mods'
+                notice_div.display = 'flex'
+            } else {
+                mod_status.style.display = 'flex'
+                total_chosen.push(mod_code)
+                if (mod_button.classList[1] === 'lvl_4k') {
+                    chosen_4ks++
+                    console.log('4K ADDEDDDDDDDDDDD')
+                }
+            }
+        } else {
+            mod_status.style.display = ''
+            total_chosen = total_chosen.filter(mod => mod !== mod_code)
+            if (mod_button.classList[1] === 'lvl_4k') {
+                chosen_4ks--
+                console.log('4K REMOVEDDDDD')
+            }
+        }
+    })    
+})
+
+// back button
+const back_button = document.querySelector('.back_button')
+
+back_button.addEventListener('click', () => {
+    if (total_chosen.length !== 5) {
+        notice_div.textContent = 'You have not selected 5 mods'
+        notice_div.style.display = 'flex'
+    } else if (chosen_4ks < 3) {
+        notice_div.textContent = 'You need at least 3 courses at Level-4000'
+        notice_div.style.display = 'flex'
+    } else {
+        localStorage.setItem('pe_mods', JSON.stringify(total_chosen))
+        window.location.href = "base.html"        
+    }
+})

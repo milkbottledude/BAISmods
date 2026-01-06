@@ -162,7 +162,30 @@ pullMods().then(() => {
 
 // checking and changing pre_req_array at the start (for core mods) AND whenever a mod is selected
 const check_prereq = (modCode) => {
-
+    const req_fors = all_mods_rf[modCode]
+    req_fors.forEach(rf => {
+        // reducing x
+        pr_strings = all_mods_pr[rf]
+        let reduce = false
+        pr_strings.forEach(pr_str => {
+            if (pr_str.includes(modCode)) {
+                if (pr_str[0] === '%') {
+                    reduce = true
+                } else if (pr_str[0] === '!') {
+                    // how to decide when all ! are fulfilled, damn ts hard
+                }
+            }
+        })
+        if (reduce) {
+            const divv = document.querySelector(`.${rf}`)
+            if (divv.classList[0] === 'not_claimed') {
+                const x_text = document.querySelector(`#pr_${rf}`)
+                let x_textContent = x_text.textContent
+                let new_x = Number(x_textContent.slice(-1)) - 1
+                
+            }
+        }
+    })
 }
 
 // showing pre-reqs left when clicking the button
@@ -186,7 +209,7 @@ open_prs.forEach(open_pr => {
                 }
                 pr_string += '</div>'
             } else if (str[0] === '%') {
-                pr_string += '<div class="not_claimed">One of: '
+                pr_string += `<div class="not_claimed ${mod_code}">One of: `
                 str.pop()
                 while (str.length > 1) {
                     let pr = str.pop()

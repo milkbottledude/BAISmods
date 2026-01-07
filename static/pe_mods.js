@@ -145,7 +145,7 @@ pullMods().then(() => {
             } else {
                 x++
                 if (str[0] === '%') {
-                    const mods = str.split(' ').slice(1)
+                    const mods = str.split(' ').slice(1, -1)
                     one_of_dict = {}
                     mods.forEach(mod => one_of_dict[mod] = false)
                     all_mods_pr[mod_code]['%'].push(one_of_dict)
@@ -196,32 +196,30 @@ open_prs.forEach(open_pr => {
         const mod_code = open_pr.id.slice(3)
         const pre_reqs = all_mods_pr[mod_code]
         let pr_string = ''
-        for (let str of pre_reqs) {
-            str = str.split(' ')
-            if (str[0] === '!') {
+        for (let [key, value] of Object.entries(pre_reqs)) {
+            if (key === '!') {
                 pr_string += '<div>All of: '
-                while (str.length > 1) {
-                    let pr = str.pop()
+                Object.keys(value).forEach(pr => {
                     if (selected_mods.includes(pr)) {
                         pr_string += `<span class="${pr}_window green_fn">${pr}</span> `
                     } else {
                         pr_string += `<span class="${pr}_window">${pr}</span> `
                     }
-                }
+                })
                 pr_string += '</div>'
-            } else if (str[0] === '%') {
-                pr_string += `<div class="not_claimed ${mod_code}">One of: `
-                str.pop()
-                while (str.length > 1) {
-                    let pr = str.pop()
-                    if (selected_mods.includes(pr)) {
-                        pr_string += `<span class="${pr}_window green_fn">${pr} </span> `
-                    } else {
-                        pr_string += `<span class="${pr}_window">${pr} </span> `
-                    }
+            } else if (key === '%') {
+                for (const dict of value) {
+                    pr_string += `<div class="not_claimed ${mod_code}">One of: `
+                    Object.keys(dict).forEach(pr => {
+                        if (selected_mods.includes(pr)) {
+                            pr_string += `<span class="${pr}_window green_fn">${pr} </span> `
+                        } else {
+                            pr_string += `<span class="${pr}_window">${pr} </span> `
+                        }
+                    })
+                    pr_string += '</div>'                    
                 }
-                pr_string += '</div>'
-            } else if (str[0] === '?') {
+            } else if (key === '?') {
                 let shld_hav = ''
                 if (str.includes('MA1301')) {
                     shld_hav = "H2 Math"

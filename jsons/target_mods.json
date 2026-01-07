@@ -672,5 +672,94 @@
       "! GEH1032 PC3294 PC3295",
       "% LSM2212 LSM2233 LSM3243 LSM3223 LSM4243 2"
     ]
+  },
+  "language_mods": {
+    "Arabic": [
+      "LAR1201",
+      "LAR2201",
+      "LAR3201",
+      "LAR3202",
+      "LAR4201",
+      "LAR4202"
+    ],
+    "Bahasa Indonesia": [],
+    "Chinese": [
+      "LAC1201",
+      "LAC2201",
+      "LAC3201",
+      "LAC3202",
+      "LAC4201",
+      "LAC4202"
+    ],
+    "German": [
+      "LAG1201",
+      "LAG2201",
+      "LAG3201",
+      "LAG3202",
+      "LAG4201",
+      "LAG4202"
+    ],
+    "French": [
+      "LAF1201",
+      "LAF2201",
+      "LAF3201",
+      "LAF3202",
+      "LAF4201",
+      "LAF4202"
+    ],
+    "Japanese": [
+      "LAJ1201",
+      "LAJ2201",
+      "LAJ2202",
+      "LAJ2203",
+      "LAJ3201",
+      "LAJ3202"
+    ],
+    "Korean": [
+      "LAK1201",
+      "LAK2201",
+      "LAK3201",
+      "LAK3202",
+      "LAK4201",
+      "LAK4202",
+      "LAK4203",
+      "LAK4204"
+    ],
+    "Malay": [
+      "LAM1201",
+      "LAM2201",
+      "LAM3201",
+      "LAM3202",
+      "LAM4201",
+      "LAM4202"
+    ],
+    "Spanish": [
+      "LAS1201",
+      "LAS2201",
+      "LAS3201",
+      "LAS3202",
+      "LAS4201",
+      "LAS4202"
+    ],
+    "Tamil": [
+      "LAL1201",
+      "LAL2201"
+    ],
+    "Thai": [
+      "LAT1201",
+      "LAT2201",
+      "LAT3201",
+      "LAT3202",
+      "LAT4201",
+      "LAT4202"
+    ],
+    "Vietnamese": [
+      "LAV1201",
+      "LAV2201",
+      "LAV3201",
+      "LAV3202",
+      "LAV4201",
+      "LAV4202"
+    ]
   }
 }

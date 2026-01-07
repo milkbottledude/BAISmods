@@ -131,12 +131,28 @@ pullMods().then(() => {
         const mod_code = mod_button.textContent
         // pre_req
         pre_req_array = all_mods_dict[mod_code]['pre_reqs']
+        all_mods_pr[mod_code] = {'%': []}
         let x = 0
         for (const str of pre_req_array) {
             if (str[0] === '!') {
-                x += str.split(' ').length - 1
+                const mods = str.split(' ').slice(1)
+                x += mods.length
+                all_of_dict = {}
+                mods.forEach(mod => {
+                    all_of_dict[mod] = false
+                })
+                all_mods_pr[mod_code]['!'] = all_of_dict
             } else {
                 x++
+                if (str[0] === '%') {
+                    const mods = str.split(' ').slice(1)
+                    one_of_dict = {}
+                    mods.forEach(mod => one_of_dict[mod] = false)
+                    all_mods_pr[mod_code]['%'].push(one_of_dict)
+                } else if (str[0] === '?') {
+                    const ting = str.slice(2)
+                    all_mods_pr[mod_code]['?'] = {ting: false}
+                }
             }
         }
         const pr_NA = document.querySelector(`#pr_${mod_code}`)
@@ -151,7 +167,7 @@ pullMods().then(() => {
             pr_NA.style.backgroundColor = 'red'
             pr_NA.style.color = 'white'
         }
-        all_mods_pr[mod_code] = pre_req_array
+        // all_mods_pr[mod_code] = pre_req_array
         // req_for
         req_for_arr = all_mods_dict[mod_code]['req_for']
         all_mods_rf[mod_code] = req_for_arr

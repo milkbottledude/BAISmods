@@ -235,6 +235,21 @@ def step6pt2():
             obj['pre_reqs'] = []
     to_json(all_mods, 'all_mods.json')
 
+def step7():
+    lan_string = "Arabic Bahasa Indonesia Chinese German French Japanese Korean Malay Spanish Tamil Thai Vietnamese"
+    langs = lan_string.split()
+    all_mods_list = read_json('jsons/all_mods.json')
+    target_mods = read_json('jsons/target_mods.json')
 
+    language_mods = {}
+    for lan in langs:
+        language_mods[lan] = []
 
+    for key, value in all_mods_list.items():
+        title_string = value['title']
+        title = title_string.split()
+        if title[0] in langs and len(title) <= 2:
+            language_mods[title[0]].append(key)
 
+    target_mods['language_mods'] = language_mods
+    to_json(target_mods)

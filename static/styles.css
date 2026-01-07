@@ -197,3 +197,29 @@ body {
 .green_fn {
     color: green;
 }
+
+/* ue_mods */
+.major {
+    background-color: grey;
+}
+
+#ue_credit {
+    display: flex;
+    position: absolute;
+    background-color: rgb(101, 101, 163);
+    bottom: 0;
+    height: 82px;
+    width: 100%;
+    align-items: center;   
+    justify-content: center;
+    font-size: 25px;
+    color: aliceblue;
+}
+
+#remaining_crs {
+    white-space: pre;
+    font-weight: bold;
+    font-size: 29px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: burlywood;
+}

@@ -389,6 +389,47 @@ That concludes our work for syncing the ID and CD modules to BAISmods. This way,
 
 Here, we provide the list of modules applicable for ID and CD education use.
 
+### Chapter 1.5: Language Modules
+
+The NUS Centre of Language Studies offers a wide variety of languages for students to learn. We will including the following in BAISmods:
+
+- Arabic (6 lvls)
+- Bahasa Indonesia (6 lvls)
+- Chinese (6 lvls)
+- German (6 lvls)
+- French (6 lvls)
+- Japanese (6 lvls)
+- Korean (8 lvls)
+- Malay (6 lvls)
+- Spanish (6 lvls)
+- Tamil (2 lvls)
+- Thai (6 lvls)
+- Vietnamese (6 lvls)
+
+I will be adding these to target_mods.json under the key 'language_mods'.
+
+```
+    lan_string = "Arabic Bahasa Indonesia Chinese German French Japanese Korean Malay Spanish Tamil Thai Vietnamese"
+    langs = lan_string.split()
+    all_mods_list = read_json('jsons/all_mods.json')
+    target_mods = read_json('jsons/target_mods.json')
+
+    language_mods = {}
+    for lan in langs:
+        language_mods[lan] = []
+
+    for key, value in all_mods_list.items():
+        title_string = value['title']
+        title = title_string.split()
+        if title[0] in langs and len(title) <= 2:
+            language_mods[title[0]].append(key)
+
+    target_mods['language_mods'] = language_mods
+    to_json(target_mods)
+```
+
+With this, I've added all the language course mods that a BAIS student can take. Of course, I did have to prune the mods abit, such as removing the outdated HM mods.
+
 ## Chapter 2: Unrestricted Modules
 
 ### 2.1: Modules of Minors

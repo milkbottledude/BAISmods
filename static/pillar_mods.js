@@ -82,6 +82,9 @@ const back_button = document.querySelector('.back_button')
 const not_done = document.querySelector('.not_done_notice')
 
 const core_mods = [
+    "CS1010A",
+    "IS1108",
+    "BT1101",
     "BT2102",
     "CS2030",
     "CS2040",
@@ -109,6 +112,7 @@ back_button.addEventListener('click', () => {
     } else {
         localStorage.setItem('pillar_mods', JSON.stringify(mods_chosen))
         localStorage.setItem('core_mods', JSON.stringify(core_mods))
+        localStorage.setItem('pe_mods', JSON.stringify([]))
         window.location.href = "base.html"
     }
 })

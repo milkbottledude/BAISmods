@@ -116,10 +116,19 @@ back_button.addEventListener('click', () => {
     }
 })
 
+// checking and changing pre_req_array at the start (for core mods) AND whenever a mod is selected
+const to_green = (modCode) => {
+    const green_ts = document.querySelectorAll(`.${modCode}_window`)
+    green_ts.forEach(ts => {
+        ts.classList.add('green_fn')
+    })
+}
+
 // dynamically adding pre-reqs to html from all_mods.json
 let all_mods_dict;
 const all_mods_pr = {}
 const all_mods_rf = {}
+const selected_mods = JSON.parse(localStorage.getItem('core_mods'))
 
 const pullMods = async () => {
     const raw = await fetch('../jsons/all_mods.json')
@@ -155,6 +164,32 @@ pullMods().then(() => {
                 }
             }
         }
+        // dynamically changing x here
+        const mod_dict = all_mods_pr[mod_code]
+        let remove = 0
+        for ([key, value] of Object.entries(mod_dict)) {
+            if (key === '!') {
+                Object.keys(value).forEach(mod1 => {
+                    if (selected_mods.includes(mod1)) {
+                        value[mod1] = true
+                        remove++
+                    }
+                })
+            } else if (key === '%') {
+                value.forEach(childDict => {
+                    let case_remove = false
+                    Object.keys(childDict).forEach(mod2 => {
+                        if (selected_mods.includes(mod2)) {
+                            case_remove = true
+                        }
+                    })
+                    if (case_remove) {
+                        remove++
+                    }
+                })
+            }
+        }
+        x -= remove
         const pr_NA = document.querySelector(`#pr_${mod_code}`)
         pr_NA.textContent = `prereqs left: ${x}`
         if (x === 1) {
@@ -176,20 +211,13 @@ pullMods().then(() => {
 .then(() => console.log(all_mods_pr))
 .then(() => console.log(Object.keys(all_mods_pr).length))
 
-// checking and changing pre_req_array at the start (for core mods) AND whenever a mod is selected
-const to_green = (modCode) => {
-    const green_ts = document.querySelectorAll(`.${modCode}_window`)
-    green_ts.forEach(ts => {
-        ts.classList.add('green_fn')
-    })
-}
-const selected_mods = JSON.parse(localStorage.getItem('core_mods'))
-
 // showing pre-reqs left when clicking the button
 const pr_window = document.querySelector('.pr_window')
 const pr_text = document.querySelector('.prs_left')
 const open_prs = document.querySelectorAll('.pre_reqs')
 const got_it = document.querySelector('.got_it')
+const selected_pe_mods = JSON.parse(localStorage.getItem('pe_mods'))
+
 
 open_prs.forEach(open_pr => {
     open_pr.addEventListener('click', () => {
@@ -200,7 +228,8 @@ open_prs.forEach(open_pr => {
             if (key === '!') {
                 pr_string += '<div>All of: '
                 Object.keys(value).forEach(pr => {
-                    if (selected_mods.includes(pr)) {
+                    if (selected_pe_mods.includes(pr) || selected_mods.includes(pr) ) {
+                        // update true/false status here
                         pr_string += `<span class="${pr}_window green_fn">${pr}</span> `
                     } else {
                         pr_string += `<span class="${pr}_window">${pr}</span> `
@@ -211,13 +240,14 @@ open_prs.forEach(open_pr => {
                 for (const dict of value) {
                     pr_string += `<div class="not_claimed ${mod_code}">One of: `
                     Object.keys(dict).forEach(pr => {
-                        if (selected_mods.includes(pr)) {
+                        if (selected_pe_mods.includes(pr) || selected_mods.includes(pr)) {
+                            // update true/false status here
                             pr_string += `<span class="${pr}_window green_fn">${pr} </span> `
                         } else {
                             pr_string += `<span class="${pr}_window">${pr} </span> `
                         }
                     })
-                    pr_string += '</div>'                    
+                    pr_string += '</div>'              
                 }
             } else if (key === '?') {
                 let shld_hav = ''

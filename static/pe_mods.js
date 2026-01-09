@@ -1,3 +1,23 @@
+const core_mods = [
+    "CS1010A",
+    "IS1108",
+    "BT1101",
+    "BT2102",
+    "CS2030",
+    "CS2040",
+    "IS2101",
+    "IS2108",
+    "IS2109",
+    "IS3103",
+    // "Ind_XP_req/CP4101",
+    "IS4108",
+    "MA1521",
+    "MA1522",
+    "ST2334"
+]
+
+localStorage.setItem('core_mods', JSON.stringify(core_mods))
+
 const DigBiz_button = document.querySelector('#dropButDigBiz')
 const DigBiz_list = document.querySelector('#dropDigBiz')
 
@@ -352,6 +372,7 @@ got_it.addEventListener('click', () => {
 
 // back button
 const back_button = document.querySelector('.back_button')
+const incomplete_prs = {}
 
 back_button.addEventListener('click', () => {
     if (total_chosen.length !== 5) {
@@ -373,6 +394,41 @@ back_button.addEventListener('click', () => {
             selected_pe_mods[mod] = all_mods_pr[mod]
         })
         localStorage.setItem('PE_mods', JSON.stringify(selected_pe_mods))
-        window.location.href = "base.html"        
+        for (let [key, value] of Object.entries(selected_pe_mods)) {
+            for (let [sign, subVal] of Object.entries(value)) {
+                if (sign === '!') {
+                    for (let [mod, bool] of Object.entries(subVal)) {
+                        if (bool === false) {
+                            if (incomplete_prs[key]) {
+                                incomplete_prs[key].push(mod)
+                            } else {
+                                incomplete_prs[key] = [mod]
+                            }
+                        }
+                    }
+                } else if (sign === '%') {
+                    let to_add = []
+                    subVal.forEach(childDict => {
+                        if (!Object.values(childDict).some(Boolean)) {
+                            to_add.push(Object.keys(childDict)[0])
+                        }
+                    })
+                    if (incomplete_prs[key]) {
+                        to_add.forEach(mod_add => incomplete_prs[key].push(mod_add))
+                    } else {
+                        to_add.forEach(mod_add => incomplete_prs[key] = [mod_add])
+                    }
+                }
+            }
+        }
+        if (Object.keys(incomplete_prs).length > 0) {
+            pr_window.style.display = 'flex'
+            setTimeout(() => {
+                window.location.href = "base.html"        
+            }, 1900)            
+        } else {
+                window.location.href = "base.html"        
+        }
+
     }
 })

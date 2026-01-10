@@ -66,13 +66,13 @@ all_mod_buttons.forEach(mod_button => {
         }
         mods_chosen[grp] = mod_code
         if (grp === 'GEX') {
-            GEX_button.style.backgroundColor = 'green'
+            GEX_button.classList.add = 'green_bg'
         } else if (grp === 'GEC') {
-            GEC_button.style.backgroundColor = 'green'
+            GEC_button.classList.add = 'green_bg'
         } else if (grp === 'GES') {
-            GES_button.style.backgroundColor = 'green'
+            GES_button.classList.add = 'green_bg'
         } else if (grp === 'GEN') {
-            GEN_button.style.backgroundColor = 'green'
+            GEN_button.classList.add = 'green_bg'
         }
     })    
 })

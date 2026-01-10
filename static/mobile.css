@@ -336,3 +336,7 @@ body {
     justify-content: center;
     gap: 0 30px;          
 }
+
+.green_bg {
+    background-color: rgb(9, 237, 9);
+}

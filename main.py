@@ -18,7 +18,7 @@ def pe():
 def ue():
     return render_template('ue_mods.html')
 
-@app.route('idcd_mods/')
+@app.route('/idcd_mods')
 def idcd():
     return render_template('idcd_mods.html')
 

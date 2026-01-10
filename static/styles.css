@@ -326,12 +326,11 @@ body {
 
 /* languages */
 .language_tile {
-    width: 270px;
+    width: 320px;
 }
 
 .cols2 {
     display: flex;        
     justify-content: center;
-    gap: 0 30px;          
-    background-color: black;
+    gap: 0px 60px;          
 }

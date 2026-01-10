@@ -20,3 +20,9 @@ language_tiles.forEach(tile => {
         }
     })
 })
+
+const back = document.querySelector('back_button')
+back.addEventListener('click', () => {
+    localStorage.setItem('languages', JSON.stringify(langs_chosen))
+    window.location.href = '/ue_mods'
+})

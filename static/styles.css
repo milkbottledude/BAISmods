@@ -44,18 +44,6 @@ body {
     height: max-content;
 }
 
-.window_PE {
-    display: none;
-}
-
-.window_UE {
-    display: none;
-}
-
-.window_IDCD {
-    display: none;
-}
-
 .mod_title {
     margin-bottom: 5%;
     font-size: 131%;

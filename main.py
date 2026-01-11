@@ -30,6 +30,18 @@ def idcd():
 def timetable():
     return render_template('timetable.html')
 
+@app.route('/languages')
+def languages():
+    return render_template('languages.html')
+
+@app.route('/minors')
+def minors():
+    return render_template('minors.html')
+
+@app.route('/others')
+def others():
+    return render_template('others.html')
+
 # @app.route('/')
 # def home():
 #     return render_template('base.html')

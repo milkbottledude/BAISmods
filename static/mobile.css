@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    background-color: rgb(62, 62, 56);
 }
 /* Base */
 .top_banner {
@@ -222,9 +223,9 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
     margin: 20px;
-    font-size: 28px;
+    font-size: 27px;
     background-color: aliceblue;
     border: 2px solid black;
     height: 70%;
@@ -330,6 +331,6 @@ body {
 }
 
 .green_bg {
-    /* background-color: rgb(9, 237, 9); */
-    background-color: blueviolet;
+    background-color: rgb(9, 237, 9);
+    /* background-color: blueviolet; */
 }

@@ -382,9 +382,6 @@ body {
     font-size: 32px;
 }
 
-.mod_req {
-    border: 1px solid black;
-}
 
 .col_div {
     display: none;
@@ -428,5 +425,5 @@ body {
 
 
 .green_bg {
-    background-color: rgb(23, 196, 23);
+    background-color: rgb(21, 176, 21);
 }

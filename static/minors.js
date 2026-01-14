@@ -1,3 +1,4 @@
+minor_mrs = {};
 (async () => {
     // gotta load these brats first
     const target_mods = await fetch('/jsons/target_mods.json').then(r => r.json())
@@ -14,10 +15,12 @@ mod_req_buttons.forEach(mod_req_button => {
     let alr_done = '' // temp, to see completed mod_reqs
     let x = 0
     let container_no = 1
+    minor_mrs[minor_key] = {'%<': []}
     for (const req_str of target_mods['minor_mods'][minor_key]) {
         const str_array = req_str.split(' ')
         const symbol = str_array.shift()
         if (symbol === '!') {
+            minor_mrs[minor_key]['!'] = []
             let add_to_mrs = `<div class="of_drop button_${container_no} button">All of...</div><div class="col_div container_${container_no}">`
             container_no++
             x += str_array.length
@@ -31,23 +34,26 @@ mod_req_buttons.forEach(mod_req_button => {
                     Object.values(JSON.parse(localStorage.getItem('pillar_mods'))).includes(str_piece)
                 ) {
                     alr_done += str_piece
-                    add_to_mrs += `<div class="green_fn mod_button button">${str_piece}</div>`
+                    add_to_mrs += `<div class="green_fn mod_button greyed">${str_piece}</div>`
                     x--
                 } else {
                     if (target_mods['IDCD_mods']['ID_mods'].includes(str_piece)) {
                         // console.log(`IDDDDDD ${str_piece}${minor_key}`)
-                        add_to_mrs += `<div class="orange mod_button button">${str_piece}</div>`
+                        add_to_mrs += `<div class="orange mod_button greyed">${str_piece}</div>`
                     } else if (target_mods['IDCD_mods']['CD_mods'].includes(str_piece)) {
                         // console.log(`CDDDDD ${str_piece}${minor_key}`)
-                        add_to_mrs += `<div class="yellow mod_button button">${str_piece}</div>`
+                        add_to_mrs += `<div class="yellow mod_button greyed">${str_piece}</div>`
                     } else {
-                        add_to_mrs += `<div class="mod_button button">${str_piece}</div>`
+                        add_to_mrs += `<div class="mod_button greyed">${str_piece}</div>`
                     }
+                    minor_mrs[minor_key]['!'].push(str_piece)
                 }
             }
             mrs_left_string += `${add_to_mrs}</div>`
         } else if (symbol === '%' || symbol === '<') {
+            to_add_ltr = [] // minor_mrs[minor_key]['%<']
             let amt_left = Number(str_array.pop())
+            to_add_ltr.push(amt_left)
             let amt_left_total = amt_left
             let add_to_mrs = ''
             container_no++
@@ -60,7 +66,8 @@ mod_req_buttons.forEach(mod_req_button => {
                     Object.values(JSON.parse(localStorage.getItem('pillar_mods'))).includes(str_piece)
                 ) {
                     alr_done += str_piece
-                    add_to_mrs += `<div class="green_fn mod_button button">${str_piece}</div>`
+                    add_to_mrs += `<div class="green_fn greyed mod_button button">${str_piece}</div>`
+                    to_add_ltr.push(str_piece)
                     if (amt_left > 0) {
                         amt_left--
                     }
@@ -76,13 +83,14 @@ mod_req_buttons.forEach(mod_req_button => {
                     }
                 }
             }
+            minor_mrs[minor_key][`${container_no}`] = to_add_ltr
             if (amt_left < amt_left_total) {
                 let percentage = Math.floor(amt_left/amt_left_total*100)
-                add_to_mrs = `<div class="of_drop button_${container_no}" style="background: linear-gradient(to right, rgb(23, 196, 23) ${percentage}%, white ${percentage}%)">${amt_left_total} of...</div><div class="col_div container_${container_no}">` + add_to_mrs
+                add_to_mrs = `<div class="of_drop button_${container_no}" style="background: linear-gradient(to right, rgb(23, 196, 23) ${percentage}%, white ${percentage}%)">${amt_left_total} of...</div><div class="col_div container_${container_no} ${minor_key}">` + add_to_mrs
             } else if (amt_left === 0) {
-                add_to_mrs = `<div class="of_drop button_${container_no} green_bg">${amt_left_total} of...</div><div class="col_div container_${container_no}">` + add_to_mrs                
+                add_to_mrs = `<div class="of_drop button_${container_no} green_bg">${amt_left_total} of...</div><div class="col_div container_${container_no} ${minor_key}">` + add_to_mrs                
             } else {
-                add_to_mrs = `<div class="of_drop button_${container_no}">${amt_left_total} of...</div><div class="col_div container_${container_no}">` + add_to_mrs                
+                add_to_mrs = `<div class="of_drop button_${container_no}">${amt_left_total} of...</div><div class="col_div container_${container_no} ${minor_key}">` + add_to_mrs                
             }
             x += amt_left
             mrs_left_string += `${add_to_mrs}</div>`
@@ -90,17 +98,24 @@ mod_req_buttons.forEach(mod_req_button => {
     }    
     mrs_left_string += '</div>'
     mod_req_button.textContent = `Mod req: ${x}`
-    mod_req_button.addEventListener('click', () => {
-        mrs_left.innerHTML = mrs_left_string
-        let drop_em = document.querySelector(`button_${container_no}`)
-        mrs_left.appendChild(got_it)
-        if (alr_done === '') {
-            console.log('nigga')
+    let tile_button = document.querySelector(`#${minor_key}_tile`)
+    tile_button.addEventListener('click', () => {
+        mod_req_button.textContent = `Mod req: ${x}`
+        if (tile_button.classList.contains('green_bg')) {
+            tile_button.classList.remove('green_bg')
         } else {
-            console.log(alr_done) // temp, to see completed mod_reqs
-            console.log(x)
+            mrs_left.innerHTML = mrs_left_string
+            mrs_left.appendChild(got_it)
+            if (alr_done === '') {
+                console.log('nigga')
+            } else {
+                console.log(alr_done) // temp, to see completed mod_reqs
+                console.log(x)
+            }
+            pr_window.style.display = 'flex'   
+            // CHECK IF ALL REQS BEEN FULFILLED YET
+            tile_button.classList.add('green_bg')         
         }
-        pr_window.style.display = 'flex'
     })
 })
 
@@ -118,6 +133,28 @@ pr_window.addEventListener('click', (e) => {
         } else {
             i_drop.style.display = ''
         }
+    } else if (e.target.classList.contains('mod_button')) {
+        let mod_button = e.target
+        let parent = mod_button.parentElement
+        let num = Number(parent.classList[1].at(-1))
+        let minor_key = parent.classList[2]
+        let x_div = document.querySelector(`#${minor_key}_mod_req`)
+        if (mod_button.classList.contains('green_bg')) {
+            let old = minor_mrs[minor_key][num]
+            minor_mrs[minor_key][num] = old.filter(mod => mod !== mod_button.textContent)
+            mod_button.classList.remove('green_bg')
+            let new_x = Number(x_div.textContent.at(-1)) + 1
+            x_div.textContent = `Mod Req: ${new_x}`
+            
+        } else {
+            console.log(minor_mrs)
+            console.log(parent.classList)
+            minor_mrs[minor_key][num].push(mod_button.textContent)
+            mod_button.classList.add('green_bg')
+            let new_x = Number(x_div.textContent.at(-1)) - 1
+            x_div.textContent = `Mod Req: ${new_x}`
+        }
+
     }
 })
 

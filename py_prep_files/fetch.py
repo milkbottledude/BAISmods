@@ -29,7 +29,7 @@ pillar_mods = {
 
 # saving all courses so I don't have to call everytime and overload the api
 # from_api(api_link='https://api.nusmods.com/v2/2025-2026/moduleList.json', save_json=True, json_filepath='all_mods.json')
-# from_api(api_link='https://api.nusmods.com/v2/2025-2026/modules/IS3103.json', save_json=True, json_filepath='testAPI.json')
+# from_api(api_link='https://api.nusmods.com/v2/2025-2026/modules/CS1010A.json', save_json=True, json_filepath='testAPI.json')
 
 
 
@@ -253,3 +253,13 @@ def step7():
 
     target_mods['language_mods'] = language_mods
     to_json(target_mods)
+
+    
+def check():
+    all_mods_list = read_json('jsons/all_mods.json')
+    target_mods = read_json('jsons/target_mods.json')
+    for lan in target_mods['language_mods']:
+        for mod in target_mods['language_mods'][lan]:
+            if all_mods_list[mod]["moduleCredit"] != "4":
+                print(mod)
+

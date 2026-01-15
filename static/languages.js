@@ -34,7 +34,7 @@ choose_lvls_.forEach(choose_lvl => {
         e.stopPropagation()
     })
     choose_lvl.addEventListener('change', () => {
-        const lan_id = choose_lvl.id.slice(0, -4)
+        let lan_id = choose_lvl.id.slice(0, -4)
         langs_chosen[lan_id] = choose_lvl.value
         console.log(langs_chosen)
     })

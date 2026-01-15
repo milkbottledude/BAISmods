@@ -2,6 +2,8 @@ const minor_mrs = {};
 let selected_minors = [];
 const nuh_uh = document.querySelector('.not_done_notice');
 let overlap = [];
+let ID_chosen = JSON.parse(localStorage.getItem('ID_mods'));
+let CD_chosen = JSON.parse(localStorage.getItem('CD_mods'));
 
 (async () => {
     // gotta load these brats first
@@ -11,6 +13,7 @@ let overlap = [];
 const mod_req_buttons = document.querySelectorAll('.mod_req')
 const pr_window = document.querySelector('.pr_window')
 const got_it = document.querySelector('.got_it')
+const dowan = document.querySelector('.dowan')
 const mrs_left = document.querySelector('.prs_left')
 
 mod_req_buttons.forEach(mod_req_button => {
@@ -126,28 +129,34 @@ mod_req_buttons.forEach(mod_req_button => {
                 }, 1900)
             } else {
                 mrs_left.innerHTML = mrs_left_string
-                selected_minors.push(minor_key)
                 mrs_left.appendChild(got_it)
-                if (minor_mrs[minor_key]['!']) {
-                    mod_req_button.textContent = `Mod req: ${x - minor_mrs[minor_key]['!'].length}`
-                    if (x - minor_mrs[minor_key]['!'].length === 0) {
-                        mod_req_button.classList.add('green_bg')
-                    }                    
-                }
+                mrs_left.appendChild(dowan)
                 pr_window.style.display = 'flex'   
-                tile_button.classList.add('green_bg')  
+                got_it.addEventListener('click', () => {
+                    pr_window.style.display = ''
+                    nuh_uh.textContent = `${selected_minors.length} minor(s) selected`
+                    nuh_uh.style.display = 'flex'
+                    setTimeout(() => {
+                        nuh_uh.style.display = ''
+                    }, 1200);
+                    selected_minors.push(minor_key)
+                    if (minor_mrs[minor_key]['!']) {
+                        mod_req_button.textContent = `Mod req: ${x - minor_mrs[minor_key]['!'].length}`
+                        if (x - minor_mrs[minor_key]['!'].length === 0) {
+                            mod_req_button.classList.add('green_bg')
+                        }                    
+                    }
+                    tile_button.classList.add('green_bg')   
+                })
             }
         }
     })
 })
 
-got_it.addEventListener('click', () => {
+
+
+dowan.addEventListener('click', () => {
     pr_window.style.display = ''
-    nuh_uh.textContent = `${selected_minors.length} minor(s) selected`
-    nuh_uh.style.display = 'flex'
-    setTimeout(() => {
-        nuh_uh.style.display = ''
-    }, 1200);
 })
 
 pr_window.addEventListener('click', (e) => {
@@ -210,12 +219,21 @@ fuouttahere.addEventListener('click', () => {
                     hv_not_arr.add(proper_name)
                 }
             }
+            arr.forEach(mod => {
+                if (target_mods['IDCD_mods']['ID_mods'].includes(mod)) {
+                    ID_chosen.push(mod)
+                } else if (target_mods['IDCD_mods']['CD_mods'].includes(mod)) {
+                    CD_chosen.push(mod)
+                }
+            })
         }
     })
     if (hv_not_arr.size != 0) {
         hv_not_arr.forEach(minor_name => {
             hv_not_str += `${minor_name} \n`
         })
+        ID_chosen = JSON.parse(localStorage.getItem('ID_mods'))
+        CD_chosen = JSON.parse(localStorage.getItem('CD_mods'))
         nuh_uh.textContent = hv_not_str
         nuh_uh.style.display = 'flex'
         setTimeout(() => {
@@ -232,6 +250,8 @@ fuouttahere.addEventListener('click', () => {
             }
         })
         localStorage.setItem('minors', to_base)
+        localStorage.setItem('ID_w_minor', ID_chosen)
+        localStorage.setItem('CD_w_minor', CD_chosen)
         window.location.href = '/ue_mods'
     }
 })

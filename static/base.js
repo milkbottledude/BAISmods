@@ -6,7 +6,7 @@ progress_bar.addEventListener('click', () => {
 })
 let progress_amt = 0
 
-const to_window = (type) => {
+const to_window = (type, pt2=false) => {
     const tile = document.querySelector(`#${type}_tile`)
     if (tile) {
         tile.style.backgroundColor = 'rgb(23, 196, 23)'
@@ -14,7 +14,7 @@ const to_window = (type) => {
         progress_bar.style.background = `linear-gradient(to right, rgb(23, 196, 23) ${progress_amt}%, white ${progress_amt}%)`
     }
     const window = document.querySelector(`.window_${type}`)
-    window.style.display = 'flex'
+    // window.style.display = 'flex'
     let string;
     if (type === 'pillar') {
         string = `<span class="mod_title">Pillars</span>`
@@ -31,13 +31,33 @@ const to_window = (type) => {
         Object.keys(JSON.parse(localStorage.getItem(`${type}_mods`))).forEach(mod => {
             string += `<span>${mod}</span>`
         })
+    } else if (type === 'minors') {
+        string = '<span class="mod_title">Minor(s)</span>'
+        Object.keys(JSON.parse(localStorage.getItem('minors'))).forEach(minor => {
+            string += `<span>${minor}</span>`      
+        })  
+    } else if (type === 'Languages') {   
+        string = '<span class="mod_title">Language(s)</span>'
+        for (let [lang, lvl] of Object.entries(JSON.parse(localStorage.getItem('languages')))) {
+            if (lang === 'Bahasa') {
+                lang = 'Bahasa Indonesia'
+            }
+            string += `<span>${lang} ${lvl}</span>` 
+        }
     } else {
+        console.log(type)
         string = `<span class="mod_title">${type} Mods</span>`
-        Object.values(JSON.parse(localStorage.getItem(`${type}_mods`))).forEach(mod => {
-            string += `<span>${mod}</span>`
-        })
-    }
+        if (!pt2) {
+            Object.values(JSON.parse(localStorage.getItem(`${type}_mods`))).forEach(mod => {
+                string += `<span>${mod}</span>`     
+            })       
+        } else {
+            Object.values(JSON.parse(localStorage.getItem(`${type}_mods2`))).forEach(mod => {
+                string += `<span>${mod}</span>` 
+            })
+        }
     window.innerHTML = string
+    }
 }
 
 if (JSON.parse(localStorage.getItem('pillar_mods') !== null)) {
@@ -58,30 +78,44 @@ if (JSON.parse(localStorage.getItem('PE_mods') !== null)) {
         tile.removeAttribute('href')
     })
 }
-
+const ID_mods2 = JSON.parse(localStorage.getItem('ID_mods2'))
+const CD_mods2 = JSON.parse(localStorage.getItem('CD_mods2'))
 const ID_mods = JSON.parse(localStorage.getItem('ID_mods'))
 const CD_mods = JSON.parse(localStorage.getItem('CD_mods'))
 const Others = JSON.parse(localStorage.getItem('Others'))
 let IDCD_total = 0
 
-if (ID_mods !== null) {
-    if (ID_mods.length) {
-        to_window('ID')
-        if (IDCD_total < 3) {
-            IDCD_total += ID_mods.length
-        }
-        console.log(IDCD_total)
-        console.log(ID_mods)
-    }
-}
-if (CD_mods !== null) {
-    if (CD_mods.length) {
-        to_window('CD')
-        if (IDCD_total < 3) {
-            IDCD_total++
+if (!ID_mods2) {
+    if (ID_mods !== null) {
+        if (ID_mods.length) {
+            to_window('ID')
+            if (IDCD_total < 3) {
+                IDCD_total += ID_mods.length
+            }
+            console.log(IDCD_total)
+            console.log(ID_mods)
         }
     }
+    if (CD_mods !== null) {
+        if (CD_mods.length) {
+            to_window('CD')
+            if (IDCD_total < 3) {
+                IDCD_total++
+            }
+        }
+    }    
+} else {
+    if (ID_mods2.length) {
+        to_window('ID', pt2=true)
+    }
+    if (CD_mods2.length) {
+        to_window('CD', pt2=true)
+    }
 }
+
+
+
+
 if (Others !== null) {
     if (Others.length) {
         to_window('Others')
@@ -99,18 +133,23 @@ if (IDCD_total === 1) {
     progress_amt += 25
 }
 
-const minor_dict = JSON.parse(localStorage.getItem('minors'))
+let minor_dict = localStorage.getItem('minors')
+if (minor_dict != null) {
+    minor_dict = JSON.parse(minor_dict)
+}
 if (minor_dict) {
     let UE_crs_left = JSON.parse(localStorage.getItem('UE_crs_left'))
     let percentage = 100 - Math.floor(UE_crs_left/40*100)
     UE_tile.style.background = `linear-gradient(to right, rgb(23, 196, 23) ${percentage}%, aqua ${percentage}%)`
     progress_amt += Math.floor(25 * (1-(UE_crs_left/40)))
     progress_bar.style.background = `linear-gradient(to right, rgb(23, 196, 23) ${progress_amt}%, white ${progress_amt}%)`
+    to_window('minors')
 }
 
-
-
-
+const languages_arr = JSON.parse(localStorage.getItem('languages'))
+if (languages_arr) {
+    to_window('Languages')
+}
 
 const got_it = document.querySelector('.got_it')
 got_it.addEventListener('click', () => {
@@ -121,11 +160,25 @@ got_it.addEventListener('click', () => {
 const pe_tile = document.querySelector('#PE_tile')
 const reset_notice = document.querySelector('#u_sure_window')
 const reset_text = document.querySelector('#u_sure_text')
-const go_in = document.querySelector('#go_in')
+let go_in = document.querySelector('#go_in')
+// ffs...
+const new_go_in = go_in.cloneNode(true)
+go_in.replaceWith(new_go_in)
+go_in = new_go_in
 const nuh_uh = document.querySelector('#nuh_uh')
 
+nuh_uh.addEventListener('click', () => {
+    reset_notice.style.display = 'none'
+})
+
+const goInPE = () => {window.location.href = '/pe_mods'}
+const goInUE = () => {window.location.href = '/ue_mods'}
+const goInIDCD = () => {window.location.href = '/idcd_mods'}
+
+let currentHandler = null
+
 pe_tile.addEventListener('click', () => {
-    if (pe_tile.style.background = 'rgb(23, 196, 23)') {
+    if (localStorage.getItem('pe_mods')) {  // pe_tile.style.background = 'rgb(23, 196, 23)'
         let reset_mods = '<span class="purple">PE'
         if (ue_tile.style.background === 'rgb(23, 196, 23)') {
             reset_mods += 'and UE'
@@ -136,13 +189,12 @@ pe_tile.addEventListener('click', () => {
         reset_mods += ' mods</span>'
         reset_text.innerHTML = `Entering this tile will reset all your ${reset_mods} Continue?`
         reset_notice.appendChild(go_in)
-        go_in.addEventListener('click', () => {
-            window.location.href = '/pe_mods'
-        })
+        if (currentHandler) {
+            go_in.removeEventListener('click', currentHandler)
+        }
+        go_in.addEventListener('click', goInPE)
+        currentHandler = goInPE
         reset_notice.appendChild(nuh_uh)
-        nuh_uh.addEventListener('click', () => {
-            reset_notice.style.display = 'none'
-        })
         reset_notice.style.display = 'flex'
     } else {
         window.location.href = '/pe_mods'
@@ -150,7 +202,7 @@ pe_tile.addEventListener('click', () => {
 })
 
 ue_tile.addEventListener('click', () => {
-    if (ue_tile.style.background = 'rgb(23, 196, 23)') {
+    if (minor_dict) {
         let reset_mods = '<span class="purple">UE'
         if (pe_tile.style.background === 'rgb(23, 196, 23)') {
             reset_mods += 'and PE'
@@ -161,13 +213,12 @@ ue_tile.addEventListener('click', () => {
         reset_mods += ' mods</span>'
         reset_text.innerHTML = `Entering this tile will reset all your ${reset_mods} Continue?`
         reset_notice.appendChild(go_in)
-        go_in.addEventListener('click', () => {
-            window.location.href = '/ue_mods'
-        })
+        if (currentHandler) {
+            go_in.removeEventListener('click', currentHandler)
+        }
+        go_in.addEventListener('click', goInUE)
+        currentHandler = goInUE
         reset_notice.appendChild(nuh_uh)
-        nuh_uh.addEventListener('click', () => {
-            reset_notice.style.display = 'none'
-        })
         reset_notice.style.display = 'flex'
     } else {
         window.location.href = '/ue_mods'
@@ -176,23 +227,22 @@ ue_tile.addEventListener('click', () => {
 
 IDCD_tile.addEventListener('click', () => {
     if (IDCD_tile.style.background = 'rgb(23, 196, 23)') {
-        let reset_mods = '<span class="purple">IDCD'
-        if (PE_tile.style.background === 'rgb(23, 196, 23)') {
-            reset_mods += 'and PE'
+        let reset_mods = '<span class="purple">IDCD '
+        if (pe_tile.style.backgroundColor === 'rgb(23, 196, 23)') {
+            reset_mods += 'and PE '
         }
-        if (ue_tile.style.background === 'rgb(23, 196, 23)') {
+        if (minor_dict) {
             reset_mods += 'and UE'
         }
         reset_mods += ' mods</span>'
         reset_text.innerHTML = `Entering this tile will reset all your ${reset_mods} Continue?`
         reset_notice.appendChild(go_in)
-        go_in.addEventListener('click', () => {
-            window.location.href = '/idcd_mods'
-        })
+        if (currentHandler) {
+            go_in.removeEventListener('click', currentHandler)
+        }
+        go_in.addEventListener('click', goInIDCD)
+        currentHandler = goInIDCD
         reset_notice.appendChild(nuh_uh)
-        nuh_uh.addEventListener('click', () => {
-            reset_notice.style.display = 'none'
-        })
         reset_notice.style.display = 'flex'
     } else {
         window.location.href = '/idcd_mods'

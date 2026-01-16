@@ -2,8 +2,8 @@ const minor_mrs = {};
 let selected_minors = [];
 const nuh_uh = document.querySelector('.not_done_notice');
 let overlap = [];
-let ID_chosen = [];
-let CD_chosen = [];
+let ID_chosen = localStorage.getItem('ID_mods');
+let CD_chosen = localStorage.getItem('CD_mods');
 
 (async () => {
     // gotta load these brats first
@@ -18,7 +18,7 @@ const mrs_left = document.querySelector('.prs_left')
 
 mod_req_buttons.forEach(mod_req_button => {
     let minor_key = mod_req_button.id.split('_')[0]
-    let mrs_left_string = '<div style="margin-bottom: 60px; width: 80%; display: flex; flex-direction: column; align-items: center;">'
+    let mrs_left_string = '<div style="margin-bottom: 60px; width: 80%; display: flex; flex-direction: column; align-items: center; max-height: 90%; overflow-y: auto;">'
     let alr_done = '' // temp, to see completed mod_reqs
     let x = 0
     let container_no = 1
@@ -33,7 +33,9 @@ mod_req_buttons.forEach(mod_req_button => {
             x += str_array.length
             // checking for alr done mod_reqs
             for (const str_piece of str_array) {
-                if (JSON.parse(localStorage.getItem('Others')).includes(str_piece) ||
+                if (JSON.parse(localStorage.getItem('ID_mods')).includes(str_piece) ||
+                    JSON.parse(localStorage.getItem('CD_mods')).includes(str_piece) ||
+                    JSON.parse(localStorage.getItem('Others')).includes(str_piece) ||
                     JSON.parse(localStorage.getItem('pe_mods')).includes(str_piece) ||
                     JSON.parse(localStorage.getItem('core_mods')).includes(str_piece) ||
                     Object.values(JSON.parse(localStorage.getItem('pillar_mods'))).includes(str_piece)
@@ -63,7 +65,9 @@ mod_req_buttons.forEach(mod_req_button => {
             let add_to_mrs = ''
             container_no++
             for (const str_piece of str_array) {
-                if (JSON.parse(localStorage.getItem('Others')).includes(str_piece) ||
+                if (JSON.parse(localStorage.getItem('ID_mods')).includes(str_piece) ||
+                    JSON.parse(localStorage.getItem('CD_mods')).includes(str_piece) ||
+                    JSON.parse(localStorage.getItem('Others')).includes(str_piece) ||
                     JSON.parse(localStorage.getItem('pe_mods')).includes(str_piece) ||
                     JSON.parse(localStorage.getItem('core_mods')).includes(str_piece) ||
                     Object.values(JSON.parse(localStorage.getItem('pillar_mods'))).includes(str_piece)
@@ -232,8 +236,8 @@ fuouttahere.addEventListener('click', () => {
         hv_not_arr.forEach(minor_name => {
             hv_not_str += `${minor_name} \n`
         })
-        ID_chosen = []
-        CD_chosen = []
+        ID_chosen = localStorage.getItem('ID_mods');
+        CD_chosen = localStorage.getItem('CD_mods');
         nuh_uh.textContent = hv_not_str
         nuh_uh.style.display = 'flex'
         setTimeout(() => {
@@ -250,8 +254,8 @@ fuouttahere.addEventListener('click', () => {
             }
         })
         localStorage.setItem('minors', JSON.stringify(to_base))
-        localStorage.setItem('ID_mods', JSON.stringify(ID_chosen))
-        localStorage.setItem('CD_mods', JSON.stringify(CD_chosen))
+        localStorage.setItem('ID_mods2', JSON.stringify(ID_chosen))
+        localStorage.setItem('CD_mods2', JSON.stringify(CD_chosen))
         // window.location.href = '/ue_mods'
     }
 })

@@ -89,6 +89,21 @@ body {
     box-shadow: 0 1px 0 black;
 }
 
+#u_sure_text {
+    text-align: center;
+}
+
+#go_in {
+    right: 30%;
+    bottom: 20%;
+}
+
+#nuh_uh {
+    left: 30%;
+    bottom: 20%;
+    width: 60px;
+}
+
 /* pillar_mods */
 .back_button {
     display: flex;

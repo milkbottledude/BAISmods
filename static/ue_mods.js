@@ -26,28 +26,39 @@ if (minor_mods > 0) {
 }
 
 
-const ID_mods = JSON.parse(localStorage.getItem('ID_mods'))
-const CD_mods = JSON.parse(localStorage.getItem('CD_mods'))
+const ID_mods2 = JSON.parse(localStorage.getItem('ID_mods2'))
+const CD_mods2 = JSON.parse(localStorage.getItem('CD_mods2'))
 
-const counted_ID = []
-const counted_CD = []
+const counted_ID = JSON.parse(localStorage.getItem('ID_mods'))
+const counted_CD = JSON.parse(localStorage.getItem('CD_mods'))
 
-while (counted_ID.length < 3 && ID_mods.length != 0) {
-    counted_ID.push(ID_mods.shift())
+let crs2 = 0
+while (counted_ID.length < 3 && ID_mods2.length != 0) {
+    counted_ID.push(ID_mods2.pop())
+    crs2 += 4
 }
 
-if (counted_ID.length < 3 && CD_mods.length != 0) {
-    counted_CD.push(CD_mods.shift())
+if (counted_ID.length < 3 && counted_CD.length === 0 && CD_mods2.length != 0) {
+    counted_CD.push(CD_mods2.pop())
+    crs2 += 4
 }
 
-for (let x = 0; x < counted_CD.length + counted_ID.length; x++) {
-    let crs2 = Number(remaining_crs_span.textContent) + 4
-    if (crs2 < 0) {
+crs2 += Number(remaining_crs_span.textContent)
+if (crs2 < 0) {
+    remaining_crs_span.classList.add('red')
+}
+remaining_crs_span.textContent = crs2
+
+
+JSON.parse(localStorage.getItem('Others')).forEach(other_mod => {
+    let crs3 = Number(remaining_crs_span.textContent) - 4
+    if (crs3 < 0) {
         remaining_crs_span.classList.add('red')
     }
-    remaining_crs_span.textContent = crs2
-}
+    console.log('removed other')
+    remaining_crs_span.textContent = crs3
+})
 
-localStorage.setItem('ID_mods', JSON.stringify(counted_ID))
-localStorage.setItem('CD_mods', JSON.stringify(counted_CD))
+localStorage.setItem('ID_mods3', JSON.stringify(counted_ID))
+localStorage.setItem('CD_mods3', JSON.stringify(counted_CD))
 localStorage.setItem('UE_crs_left', JSON.stringify(remaining_crs_span.textContent))

@@ -392,7 +392,7 @@ back_button.addEventListener('click', () => {
             notice_div.style.display = 'none'
         }, 1900)
     } else {
-        localStorage.setItem('pe_mods', JSON.stringify(total_chosen))
+        console.log(total_chosen)
         const selected_pe_mods = {}
         total_chosen.forEach(mod => {
             selected_pe_mods[mod] = all_mods_pr[mod]

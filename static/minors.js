@@ -2,8 +2,8 @@ const minor_mrs = {};
 let selected_minors = [];
 const nuh_uh = document.querySelector('.not_done_notice');
 let overlap = [];
-let ID_chosen = localStorage.getItem('ID_mods');
-let CD_chosen = localStorage.getItem('CD_mods');
+let ID_chosen = JSON.parse(localStorage.getItem('ID_mods'));
+let CD_chosen = JSON.parse(localStorage.getItem('CD_mods'));
 
 (async () => {
     // gotta load these brats first
@@ -236,8 +236,8 @@ fuouttahere.addEventListener('click', () => {
         hv_not_arr.forEach(minor_name => {
             hv_not_str += `${minor_name} \n`
         })
-        ID_chosen = localStorage.getItem('ID_mods');
-        CD_chosen = localStorage.getItem('CD_mods');
+        ID_chosen = JSON.parse(localStorage.getItem('ID_mods'));
+        CD_chosen = JSON.parse(localStorage.getItem('CD_mods'));
         nuh_uh.textContent = hv_not_str
         nuh_uh.style.display = 'flex'
         setTimeout(() => {
@@ -256,7 +256,7 @@ fuouttahere.addEventListener('click', () => {
         localStorage.setItem('minors', JSON.stringify(to_base))
         localStorage.setItem('ID_mods2', JSON.stringify(ID_chosen))
         localStorage.setItem('CD_mods2', JSON.stringify(CD_chosen))
-        // window.location.href = '/ue_mods'
+        window.location.href = '/ue_mods'
     }
 })
 

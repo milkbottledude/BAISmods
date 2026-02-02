@@ -30,24 +30,52 @@ async function findSimilarSentences(query, sentences) {
         alert('Model still loading, please wait...')
         return
     }
-    const allTexts = [query, ...sentences]
-    const embeddings = await model.embed(allTexts)
-    const embeddingsArray = await embeddings.array()
-    embeddings.dispose()
-    const queryEmbed = embeddingsArray[0]
-    const results = []
+    // const allTexts = [query, ...sentences]
+    // const embeddings = await model.embed(allTexts)
+    // const embeddingsArray = await embeddings.array()
+    // embeddings.dispose()
+    // const queryEmbed = embeddingsArray[0]
+    // const results = []
 
-    // stopped here, it isolates the 1st embed (query) den compares the rest w the query
-    for (let i = 1; i < embeddingsArray.length; i++) {
-        const sentEmbed = embeddingsArray[i] 
-        const similarity = cosineSimilarity(queryEmbed, sentEmbed)
+    // // stopped here, it isolates the 1st embed (query) den compares the rest w the query
+    // for (let i = 1; i < embeddingsArray.length; i++) {
+    //     const sentEmbed = embeddingsArray[i] 
+    //     const similarity = cosineSimilarity(queryEmbed, sentEmbed)
+    //     results.push({ 
+    //         text: sentences[i], 
+    //         similarity: similarity.toFixed(3)
+    // })
+    // }
+
+    // return results.sort((a, b) => b.similarity - a.similarity)
+  // Embed query once
+    const queryEmbedding = await model.embed([query]);
+    const queryEmbed = (await queryEmbedding.array())[0];
+    queryEmbedding.dispose();
+
+    const results = [];
+    const batchSize = 100;  // Process 100 sentences at a time
+
+    // Process in batches
+    for (let start = 0; start < sentences.length; start += batchSize) {
+        console.log(`starting batch, at ${start} now`)
+        const batch = sentences.slice(start, start + batchSize);
+        
+        const embeddings = await model.embed(batch);
+        const embeddingsArray = await embeddings.array();
+        embeddings.dispose();
+        
+        for (let i = 0; i < batch.length; i++) {
+        const sentEmbed = embeddingsArray[i];
+        const similarity = cosineSimilarity(queryEmbed, sentEmbed);
         results.push({ 
-            text: sentences[i], 
+            text: batch[i], 
             similarity: similarity.toFixed(3)
-    })
+        });
+        }
     }
 
-    return results.sort((a, b) => b.similarity - a.similarity)
+    return results.sort((a, b) => b.similarity - a.similarity);
 }
 
 const base_tiles = document.querySelector('.base_tiles')
@@ -76,14 +104,16 @@ searchMod.addEventListener('keydown', async function(e) {
                 }
             }
         })
-        // // has to compare query text with 16619 other descs, too much
-        // if (Object.keys(to_show).length === 0 && e.target.value != '') {
-        //     const query = e.target.value
-        //     let results = await findSimilarSentences(query, Object.keys(all_descs))
-        //     results.slice(0, 8).forEach(desc => {
-        //         to_show.append(all_descs[desc])
-        //     })
-        // }
+        // has to compare query text with 16619 other descs, too much
+        if (Object.keys(to_show).length === 0 && e.target.value != '') {
+            const query = e.target.value
+            let results = await findSimilarSentences(query, Object.keys(all_descs))
+            results.slice(0, 8).forEach(result => {
+                let code = all_descs[result.text]
+                console.log(code)
+                to_show[code] = all_mods_dict[code]['title']
+            })
+        }
         for (let [code, title] of Object.entries(to_show)) {
             console.log(code)
             console.log(title)

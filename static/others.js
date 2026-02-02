@@ -6,36 +6,84 @@ if (!Others3) {
 const searchMod = document.querySelector('#search_mod')
 let target_mods;
 let all_mods_dict;
+let model;
 
-async function loadData() {
+async function loadStuff() {
     target_mods = await fetch('/jsons/target_mods.json').then(r => r.json())
     all_mods_dict = await fetch('/jsons/all_mods.json').then(r => r.json())
+    model = await use.load()
 }
 
-loadData()
+loadStuff()
+
+// tensorflow's USE instead of BERT (21 - 50)
+
+function cosineSimilarity(a, b) {
+    const dot = a.reduce((sum, val, i) => sum + val * b[i], 0)
+    const magA = Math.sqrt(a.reduce((sum, val) => sum + val * val, 0))
+    const magB = Math.sqrt(b.reduce((sum, val) => sum + val * val, 0))
+    return dot/(magA * magB)
+}
+
+async function findSimilarSentences(query, sentences) {
+    if (!model) {
+        alert('Model still loading, please wait...')
+        return
+    }
+    const allTexts = [query, ...sentences]
+    const embeddings = await model.embed(allTexts)
+    const embeddingsArray = await embeddings.array()
+    embeddings.dispose()
+    const queryEmbed = embeddingsArray[0]
+    const results = []
+
+    // stopped here, it isolates the 1st embed (query) den compares the rest w the query
+    for (let i = 1; i < embeddingsArray.length; i++) {
+        const sentEmbed = embeddingsArray[i] 
+        const similarity = cosineSimilarity(queryEmbed, sentEmbed)
+        results.push({ 
+            text: sentences[i], 
+            similarity: similarity.toFixed(3)
+    })
+    }
+
+    return results.sort((a, b) => b.similarity - a.similarity)
+}
 
 const base_tiles = document.querySelector('.base_tiles')
 let chosen_others = []
 
-searchMod.addEventListener('keydown', function(e) {
+searchMod.addEventListener('keydown', async function(e) {
     if (e.key === 'Enter') {
         console.log('pressed')
         base_tiles.innerHTML = ''
         const to_show = {}
+        const all_descs = {}
         Object.keys(all_mods_dict).forEach(key => {
-            if (key.includes(e.target.value.toUpperCase()) && e.target.value != '') {
-                if (!JSON.parse(localStorage.getItem('Others')).includes(key) &&
-                    !JSON.parse(localStorage.getItem('ID_mods2')).includes(key) &&
-                    !JSON.parse(localStorage.getItem('CD_mods2')).includes(key) &&
-                    !JSON.parse(localStorage.getItem('pe_mods')).includes(key) &&
-                    !JSON.parse(localStorage.getItem('core_mods')).includes(key) &&
-                    !Object.values(JSON.parse(localStorage.getItem('pillar_mods'))).includes(key) &&
-                    key.slice(0, 2) != 'LA' // new
-                ) {
+            if (!JSON.parse(localStorage.getItem('Others')).includes(key) &&
+                !JSON.parse(localStorage.getItem('ID_mods2')).includes(key) &&
+                !JSON.parse(localStorage.getItem('CD_mods2')).includes(key) &&
+                !JSON.parse(localStorage.getItem('pe_mods')).includes(key) &&
+                !JSON.parse(localStorage.getItem('core_mods')).includes(key) &&
+                !Object.values(JSON.parse(localStorage.getItem('pillar_mods'))).includes(key) &&
+                key.slice(0, 2) != 'LA' // new
+            ) {
+                if (!all_descs[all_mods_dict[key]['description']]) {
+                    all_descs[all_mods_dict[key]['description']] = key
+                }
+                if (key.includes(e.target.value.toUpperCase()) && e.target.value != '') {
                     to_show[key] = all_mods_dict[key]["title"]
                 }
             }
         })
+        // // has to compare query text with 16619 other descs, too much
+        // if (Object.keys(to_show).length === 0 && e.target.value != '') {
+        //     const query = e.target.value
+        //     let results = await findSimilarSentences(query, Object.keys(all_descs))
+        //     results.slice(0, 8).forEach(desc => {
+        //         to_show.append(all_descs[desc])
+        //     })
+        // }
         for (let [code, title] of Object.entries(to_show)) {
             console.log(code)
             console.log(title)
